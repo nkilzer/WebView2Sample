@@ -1,0 +1,22 @@
+﻿<html>
+<head>
+    <title>print Test</title>
+    <script type="text/javascript">
+        function testPrinting(e) {
+            var t = document.getElementById("content-body").innerHTML;
+            var r = window.open("", "_blank", "width=300,height=300,top=800,left=500");
+            r.document.open();
+            r.document.write('<html><head></head><body onload="">' + t + "<script>window.print();window.close();<\/script></body></html>");
+        }
+    </script>
+</head>
+<body>
+    <div id="content-body">
+        <title>Printing title</title>
+        <div class="md-title">Content Header</div>
+        <div class="md-subheader">Content Sub-header #1</div>
+        <div class="md-subheader">Content Sub-header #2</div>
+    </div>
+    <a href="#" onclick="testPrinting(); return false;">Execute Test</a>
+</body>
+</html>
