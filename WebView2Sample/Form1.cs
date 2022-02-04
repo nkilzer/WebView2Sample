@@ -5,6 +5,7 @@ namespace WebView2Sample;
 
 public partial class Form1 : Form
 {
+    private CoreWebView2Environment _env;
     private WebView2? _popup;
 
     public Form1()
@@ -34,9 +35,11 @@ public partial class Form1 : Form
 
     private async void Form1_Load(object sender, EventArgs e)
     {
-        tbUrl.Text = @"http://localhost:8025/TestDoc.html";
+        tbUrl.Text = @"http://localhost:8025/TestDocFail.html";
 
-        await wvMain.EnsureCoreWebView2Async();
+        var userDataPath = Path.Combine(Path.GetTempPath(), @"wv2Sample_" + Path.GetRandomFileName().Replace(".", ""), "Env");
+        _env = await CoreWebView2Environment.CreateAsync(userDataFolder: userDataPath);
+        await wvMain.EnsureCoreWebView2Async(_env);
     }
 
     private void HandleMainClose(object? sender, object e)
